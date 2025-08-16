@@ -11,20 +11,18 @@ export default function ProgressBar() {
   const pathname = usePathname();
 
   useEffect(() => {
-    // Start NProgress when route changes
+
     NProgress.start();
 
-    // Simulate loading for 800ms, then stop
     const timer = setTimeout(() => {
       NProgress.done();
     }, 800);
 
-    // Cleanup
     return () => {
       clearTimeout(timer);
       NProgress.done();
     };
-  }, [pathname]); // rerun when path changes
+  }, [pathname]); 
 
   return null;
 }

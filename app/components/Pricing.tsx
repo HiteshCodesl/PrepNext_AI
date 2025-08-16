@@ -80,7 +80,7 @@ const Pricing: React.FC = () => {
                 plan.popular ? 'ring-2 ring-primary/50 glow-primary' : ''
               }`}
             >
-              {/* Popular Badge */}
+
               {plan.popular && (
                 <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
                   <div className="bg-gradient-hero text-white px-4 py-1 rounded-full text-sm font-semibold glow-primary">
@@ -89,7 +89,6 @@ const Pricing: React.FC = () => {
                 </div>
               )}
 
-              {/* Plan Header */}
               <div className="text-center mb-8">
                 <div className="inline-flex p-3 rounded-lg bg-gradient-hero text-white mb-4 glow-primary">
                   {plan.icon}
@@ -102,7 +101,6 @@ const Pricing: React.FC = () => {
                 </div>
               </div>
 
-              {/* Features */}
               <ul className="space-y-3 mb-8">
                 {plan.features.map((feature, featureIndex) => (
                   <li key={featureIndex} className="flex items-center">
@@ -112,7 +110,6 @@ const Pricing: React.FC = () => {
                 ))}
               </ul>
 
-              {/* CTA Button */}
               <button 
                 className={`w-full py-3 px-6 rounded-lg font-semibold transition-all duration-300 ${
                   plan.popular
@@ -126,7 +123,6 @@ const Pricing: React.FC = () => {
           ))}
         </div>
 
-        {/* Bottom Note */}
         <div className="text-center mt-12">
           <p className="text-gray-400">
             All plans include a 14-day free trial. No credit card required.

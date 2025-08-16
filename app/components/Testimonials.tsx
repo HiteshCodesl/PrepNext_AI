@@ -3,15 +3,15 @@ import { Star, Quote } from 'lucide-react';
 
 const Testimonials: React.FC = () => {
   const testimonials = [
-    {
+    { 
       name: "Emily Thompson",
       role: "Product Manager at Meta",
-      company: "@sarahcreates",
+      company: "Sarah creates",
       image: "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=400",
       content: "The role-specific preparation was game-changing. I went from nervous wreck to confident candidate in just two weeks of practice",
       rating: 5
-    },
-    {
+    },  
+    { 
       name: "Marcus Rodriguez",
       role: "Marketing Director",
       company: "TechFlow Inc.",
@@ -73,24 +73,20 @@ const Testimonials: React.FC = () => {
               key={index}
               className="glass-card rounded-xl p-6 hover-lift card-dark"
             >
-              {/* Quote Icon */}
               <div className="inline-flex p-2 rounded-lg bg-gradient-hero text-white mb-4 glow-primary">
                 <Quote className="h-4 w-4" />
               </div>
 
-              {/* Rating */}
               <div className="flex space-x-1 mb-4">
                 {[...Array(testimonial.rating)].map((_, i) => (
                   <Star key={i} className="h-4 w-4 text-yellow-400 fill-current" />
                 ))}
               </div>
 
-              {/* Content */}
               <p className="text-gray-300 mb-6 leading-relaxed">
                 "{testimonial.content}"
               </p>
 
-              {/* Author */}
               <div className="flex items-center">
                 <img 
                   src={testimonial.image} 
@@ -107,7 +103,6 @@ const Testimonials: React.FC = () => {
           ))}
         </div>
 
-        {/* Stats */}
         <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
           <div className="glass-card rounded-lg p-6 hover-lift">
             <div className="text-2xl font-bold font-poppins text-primary mb-2">4.9/5</div>

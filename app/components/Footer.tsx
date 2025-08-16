@@ -8,7 +8,7 @@ const Footer: React.FC = () => {
     <footer className="glass-header border-t border-gray-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-          {/* Brand */}
+
           <div className="md:col-span-1">
             <div className="flex items-center space-x-3 mb-6">
               <div className="relative">
@@ -40,7 +40,6 @@ const Footer: React.FC = () => {
             </div>
           </div>
 
-          {/* Product */}
           <div>
             <h3 className="text-white font-semibold mb-4">Product</h3>
             <ul className="space-y-3">
@@ -51,7 +50,6 @@ const Footer: React.FC = () => {
             </ul>
           </div>
 
-          {/* Resources */}
           <div>
             <h3 className="text-white font-semibold mb-4">Resources</h3>
             <ul className="space-y-3">
@@ -62,7 +60,6 @@ const Footer: React.FC = () => {
             </ul>
           </div>
 
-          {/* Company */}
           <div>
             <h3 className="text-white font-semibold mb-4">Company</h3>
             <ul className="space-y-3">
@@ -74,7 +71,6 @@ const Footer: React.FC = () => {
           </div>
         </div>
 
-        {/* Newsletter */}
         <div className="mt-12 pt-8 border-t border-gray-800">
           <div className="md:flex md:items-center md:justify-between">
             <div className="mb-6 md:mb-0">
@@ -94,7 +90,6 @@ const Footer: React.FC = () => {
           </div>
         </div>
 
-        {/* Bottom */}
         <div className="mt-12 pt-8 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center">
           <p className="text-gray-400 text-sm">
             © 2024 PrepNextAI. All rights reserved.
@@ -106,7 +101,6 @@ const Footer: React.FC = () => {
           </div>
         </div>
 
-        {/* Contact */}
         <div className="mt-8 text-center">
           <div className="inline-flex items-center text-gray-400">
             <Mail className="h-4 w-4 mr-2" />

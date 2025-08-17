@@ -39,8 +39,9 @@ export function InterviewCard({interviewId, userId, role, type, techstack, creat
      return (
     <div className='glass-card rounded-xl hover-lift card-dark'>
       <div className=''>
+        
          <div className='absolute top-0 right-0 px-4  py-2 rounded-lg w-fit bg-light-600'>
-            <Badge variant={'secondary'}>Technical</Badge>
+            <Badge variant={'secondary'}>{type}</Badge>
          </div>
 
          <Image src={getRandomInterviewCover()} alt='cover'  height={40} width={40} className='rounded-full object-contain size-[60px] m-2' />

@@ -1,6 +1,6 @@
 "use client"
 import { UserButton, useUser } from '@clerk/nextjs'
-import { ArrowRight, BriefcaseBusiness } from 'lucide-react'
+import { ArrowRight, BriefcaseBusiness, LayoutDashboard, Square } from 'lucide-react'
 import Link from 'next/link'
 import React from 'react'
 
@@ -37,8 +37,8 @@ import React from 'react'
              }
              <Link href={"/dashboard"}>
             <button className="btn-primary flex items-center">
-              Get Started
-              <ArrowRight className="ml-2 h-4 w-4" />
+              Dashboard
+              <LayoutDashboard className="ml-2 h-4 w-4" />
             </button>
             </Link>
           </div>

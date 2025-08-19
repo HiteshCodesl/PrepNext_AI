@@ -7,7 +7,7 @@ import { Calendar, Star } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 
-interface InterviewCardProps {
+export interface InterviewCardProps {
   interviewId?: string;
   userId?: string;
   role: string;
@@ -31,7 +31,7 @@ interface Feedback {
   createdAt: string;
 }
 
-export function InterviewCard({interviewId, userId, role, type, techstack, createdAt}: InterviewCardProps) {
+export function InterviewCard({interviewId, role, type, techstack, createdAt}: InterviewCardProps) {
 
      const feedback = null as Feedback | null;
      const formattedDate = dayjs(feedback?.createdAt || createdAt || Date.now()).format('MMM D, YYYY')
@@ -69,12 +69,12 @@ export function InterviewCard({interviewId, userId, role, type, techstack, creat
             ))}
             </div>
 
-            <Button className='rounded-lg mt-4 flex mx-auto'>
+            <Button className='rounded-lg mt-4 flex mx-auto btn-accent'>
               <Link href={feedback ? 
                 `/interview/${interviewId}/feedback`
                 : `/interview/${interviewId}`
               }>
-                {feedback ? 'Check Feedback' : 'View Interview'}
+                {feedback ? 'Check Feedback' : 'Take Interview'}
               </Link>
             </Button>
           </div>

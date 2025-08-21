@@ -8,8 +8,25 @@ datasource db {
 }
 
 model User {
-  id       String  @id @unique @default(cuid())
-  name     String
-  email    String  @unique
+  id         String      @id @default(cuid())
+  name       String?
+  email      String      @unique
+  interviews Interview[]
+  clerkId    String      @unique
 }
 
+model Interview {
+  id         String   @id @default(cuid())
+  sessionId  String   @unique @default(uuid())
+  techstack  String[]
+  questions  String[]
+  coverImage String
+  role       String
+  type       String
+  level      String
+  createdAt  DateTime @default(now())
+  feedback   Json?
+  finalized  Boolean
+  userId     String
+  user       User     @relation(fields: [userId], references: [id])
+}

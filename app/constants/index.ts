@@ -1,5 +1,9 @@
-// import { CreateAssistantDTO } from "@vapi-ai/web/dist/api";
-// import { z } from "zod";
+import { z } from "zod";
+
+
+export const generateUUID = () =>{
+  crypto.randomUUID();
+}
 
 export const mappings = {
   "react.js": "react",
@@ -97,97 +101,39 @@ export const mappings = {
   "aws amplify": "amplify",
 };
 
-// export const interviewer: CreateAssistantDTO = {
-//   name: "Interviewer",
-//   firstMessage:
-//     "Hello! Thank you for taking the time to speak with me today. I'm excited to learn more about you and your experience.",
-//   transcriber: {
-//     provider: "deepgram",
-//     model: "nova-2",
-//     language: "en",
-//   },
-//   voice: {
-//     provider: "11labs",
-//     voiceId: "sarah",
-//     stability: 0.4,
-//     similarityBoost: 0.8,
-//     speed: 0.9,
-//     style: 0.5,
-//     useSpeakerBoost: true,
-//   },
-//   model: {
-//     provider: "openai",
-//     model: "gpt-4",
-//     messages: [
-//       {
-//         role: "system",
-//         content: `You are a professional job interviewer conducting a real-time voice interview with a candidate. Your goal is to assess their qualifications, motivation, and fit for the role.
-
-// Interview Guidelines:
-// Follow the structured question flow:
-// {{questions}}
-
-// Engage naturally & react appropriately:
-// Listen actively to responses and acknowledge them before moving forward.
-// Ask brief follow-up questions if a response is vague or requires more detail.
-// Keep the conversation flowing smoothly while maintaining control.
-// Be professional, yet warm and welcoming:
-
-// Use official yet friendly language.
-// Keep responses concise and to the point (like in a real voice interview).
-// Avoid robotic phrasing—sound natural and conversational.
-// Answer the candidate’s questions professionally:
-
-// If asked about the role, company, or expectations, provide a clear and relevant answer.
-// If unsure, redirect the candidate to HR for more details.
-
-// Conclude the interview properly:
-// Thank the candidate for their time.
-// Inform them that the company will reach out soon with feedback.
-// End the conversation on a polite and positive note.
-
-
-// - Be sure to be professional and polite.
-// - Keep all your responses short and simple. Use official language, but be kind and welcoming.
-// - This is a voice conversation, so keep your responses short, like in a real conversation. Don't ramble for too long.`,
-//       },
-//     ],
-//   },
-// };
-
-// export const feedbackSchema = z.object({
-//   totalScore: z.number(),
-//   categoryScores: z.tuple([
-//     z.object({
-//       name: z.literal("Communication Skills"),
-//       score: z.number(),
-//       comment: z.string(),
-//     }),
-//     z.object({
-//       name: z.literal("Technical Knowledge"),
-//       score: z.number(),
-//       comment: z.string(),
-//     }),
-//     z.object({
-//       name: z.literal("Problem Solving"),
-//       score: z.number(),
-//       comment: z.string(),
-//     }),
-//     z.object({
-//       name: z.literal("Cultural Fit"),
-//       score: z.number(),
-//       comment: z.string(),
-//     }),
-//     z.object({
-//       name: z.literal("Confidence and Clarity"),
-//       score: z.number(),
-//       comment: z.string(),
-//     }),
-//   ]),
-//   strengths: z.array(z.string()),
-//   areasForImprovement: z.array(z.string()),
-//   finalAssessment: z.string(),
-// });
+export const feedbackSchema = z.object({
+  totalScore: z.number(),
+  categoryScores: z.tuple([
+    z.object({
+      name: z.literal("Communication Skills"),
+      score: z.number(),
+      comment: z.string(),
+    }),
+    z.object({
+      name: z.literal("Technical Knowledge"),
+      score: z.number(),
+      comment: z.string(),
+    }),
+    z.object({
+      name: z.literal("Problem Solving"),
+      score: z.number(),
+      comment: z.string(),
+    }),
+    z.object({
+      name: z.literal("Cultural Fit"),
+      score: z.number(),
+      comment: z.string(),
+    }),
+    z.object({
+      name: z.literal("Confidence and Clarity"),
+      score: z.number(),
+      comment: z.string(),
+    }),
+  ]),
+  strengths: z.array(z.string()),
+  areasForImprovement: z.array(z.string()),
+  finalAssessment: z.string(),
+});
 
 export const interviewCovers = [
   "/adobe.png",
@@ -217,27 +163,155 @@ interface Interview {
   finalized: boolean;
 }
 
-export const dummyInterviews: Interview[] = [
-  {
-    id: "1",
-    userId: "user1",
-    role: "Frontend Developer",
-    type: "Technical",
-    techstack: ["React", "TypeScript", "Next.js", "Tailwind CSS"],
-    level: "Junior",
-    questions: ["What is React?"],
-    finalized: false,
-    createdAt: "2024-03-15T10:00:00Z",
-  },
-  {
-    id: "2",
-    userId: "user1",
-    role: "Full Stack Developer",
-    type: "Mixed",
-    techstack: ["Node.js", "Express", "MongoDB", "React"],
-    level: "Senior",
-    questions: ["What is Node.js?"],
-    finalized: false,
-    createdAt: "2024-03-14T15:30:00Z",
-  },
+
+export const resumes: Resume[] = [
+    {
+        id: "1",
+        companyName: "Google",
+        jobTitle: "Frontend Developer",
+        imagePath: "/resume_01.png",
+        resumePath: "/resumes/resume-1.pdf",
+        feedback: {
+            overallScore: 85,
+            ATS: {
+                score: 90,
+                tips: [],
+            },
+            toneAndStyle: {
+                score: 90,
+                tips: [],
+            },
+            content: {
+                score: 90,
+                tips: [],
+            },
+            structure: {
+                score: 90,
+                tips: [],
+            },
+            skills: {
+                score: 90,
+                tips: [],
+            },
+        },
+    },
+    {
+        id: "2",
+        companyName: "Microsoft",
+        jobTitle: "Cloud Engineer",
+        imagePath: "/resume_02.png",
+        resumePath: "/resumes/resume-2.pdf",
+        feedback: {
+            overallScore: 55,
+            ATS: {
+                score: 90,
+                tips: [],
+            },
+            toneAndStyle: {
+                score: 90,
+                tips: [],
+            },
+            content: {
+                score: 90,
+                tips: [],
+            },
+            structure: {
+                score: 90,
+                tips: [],
+            },
+            skills: {
+                score: 90,
+                tips: [],
+            },
+        },
+    },
+    {
+        id: "3",
+        companyName: "Apple",
+        jobTitle: "iOS Developer",
+        imagePath: "/resume_03.png",
+        resumePath: "/resumes/resume-3.pdf",
+        feedback: {
+            overallScore: 75,
+            ATS: {
+                score: 90,
+                tips: [],
+            },
+            toneAndStyle: {
+                score: 90,
+                tips: [],
+            },
+            content: {
+                score: 90,
+                tips: [],
+            },
+            structure: {
+                score: 90,
+                tips: [],
+            },
+            skills: {
+                score: 90,
+                tips: [],
+            },
+        },
+    },
 ];
+
+export const AIResponseFormat = `
+      interface Feedback {
+      overallScore: number; //max 100
+      ATS: {
+        score: number; //rate based on ATS suitability
+        tips: {
+          type: "good" | "improve";
+          tip: string; //give 3-4 tips
+        }[];
+      };
+      toneAndStyle: {
+        score: number; //max 100
+        tips: {
+          type: "good" | "improve";
+          tip: string; //make it a short "title" for the actual explanation
+          explanation: string; //explain in detail here
+        }[]; //give 3-4 tips
+      };
+      content: {
+        score: number; //max 100
+        tips: {
+          type: "good" | "improve";
+          tip: string; //make it a short "title" for the actual explanation
+          explanation: string; //explain in detail here
+        }[]; //give 3-4 tips
+      };
+      structure: {
+        score: number; //max 100
+        tips: {
+          type: "good" | "improve";
+          tip: string; //make it a short "title" for the actual explanation
+          explanation: string; //explain in detail here
+        }[]; //give 3-4 tips
+      };
+      skills: {
+        score: number; //max 100
+        tips: {
+          type: "good" | "improve";
+          tip: string; //make it a short "title" for the actual explanation
+          explanation: string; //explain in detail here
+        }[]; //give 3-4 tips
+      };
+    }`;
+
+export const prepareInstructions = ({jobTitle, jobDescription}: { jobTitle: string, jobDescription: string}) =>
+    `You are an expert in ATS (Applicant Tracking System) and resume analysis.
+       Please analyze and rate this resume and suggest how to improve it.
+      The rating can be low if the resume is bad.
+      Be thorough and detailed. Don't be afraid to point out any mistakes or areas for improvement.
+      If there is a lot to improve, don't hesitate to give low scores. This is to help the user to improve their resume.
+      If available, use the job description for the job user is applying to to give more detailed feedback.
+      If provided, take the job description into consideration.
+      The job title is: ${jobTitle}
+      The job description is: ${jobDescription}
+      Provide the feedback using the following format:
+      ${AIResponseFormat}
+      Return the analysis as an JSON object, without any other text and without the backticks.
+      Do not include any other text or comments.`;

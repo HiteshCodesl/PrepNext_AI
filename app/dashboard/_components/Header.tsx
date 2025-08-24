@@ -2,12 +2,24 @@
 import { UserButton, useUser } from '@clerk/nextjs'
 import { ArrowRight, BriefcaseBusiness, LayoutDashboard, Square } from 'lucide-react'
 import Link from 'next/link'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
  export function DashBoardHeader() {
   const {isSignedIn} = useUser();
+    const [scrolled, setScrolled] = useState(false);
+  
+     useEffect(() => {
+        const handleScroll = () => {
+          setScrolled(window.scrollY > 50);
+        };
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+      }, []);
+    
   return (
-    <header className={`fixed top-0 w-full z-50 transition-all duration-300`}>
+    <header className={`fixed top-0 w-full z-50 transition-all duration-300 ${
+      scrolled ? 'glass-header' : 'bg-transparent'
+    }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
 

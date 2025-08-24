@@ -12,33 +12,35 @@ import {
 import { Input } from "@/components/ui/input"
 import axios from "axios"
 import { ArrowRight, RotateCw } from "lucide-react"
+import { useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
 
 type Props = {
-    isOpen: boolean,
-    setIsOpen: (isOpen:boolean) => void
+  isOpen: boolean,
+  setIsOpen: (isOpen:boolean) => void
 }
 export function StartInterviewDialog({isOpen, setIsOpen}: Props) {
-
-   const [role, setRole] = useState("");
-   const [level, setLevel] = useState("");
-   const [techstack, setTechStack] = useState<string[]>([]);
-   const [currentTechStack, setCurrentTechStack] = useState("");
-   const [type, setType] = useState("");
-   const [amount, setAmount] = useState("");
-   const [loading, setLoading] = useState(false);
-
-   useEffect(() =>{
-        if(currentTechStack.trim() !== ""){
-         const arr = currentTechStack.split(',').map(item => item.trim());
-         setTechStack(arr);
-        }
-   }, [currentTechStack])
-
+  
+  const [role, setRole] = useState("");
+  const [level, setLevel] = useState("");
+  const [techstack, setTechStack] = useState<string[]>([]);
+  const [currentTechStack, setCurrentTechStack] = useState("");
+  const [type, setType] = useState("");
+  const [amount, setAmount] = useState("");
+  const [loading, setLoading] = useState(false);
+  const router = useRouter();
+  
+  useEffect(() =>{
+    if(currentTechStack.trim() !== ""){
+      const arr = currentTechStack.split(',').map(item => item.trim());
+      setTechStack(arr);
+    }
+  }, [currentTechStack])
+  
    const StartInterview = async() => {
     setLoading(true);
     const data = {role, level, techstack, type, amount}
-      const response = await axios.post('/api/gemini/generate',data)
+    const response = await axios.post('/api/gemini/generate',data)
 
       if(response){
         console.log(response);
@@ -48,6 +50,9 @@ export function StartInterviewDialog({isOpen, setIsOpen}: Props) {
         setTechStack([])
         setType('')
         setAmount('')
+
+        const sessionId = response.data.interview.sessionId;
+        router.push(`/dashboard/interview/${sessionId}`);
       }
    }
 

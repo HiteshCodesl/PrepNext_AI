@@ -1,13 +1,11 @@
 import React from 'react'
-import { DashBoardHeader } from './_components/Header';
-import { Toaster } from 'sonner';
+import { DashBoardHeader } from '../dashboard/_components/Header';
 
 function DashBoardlayout({children}: {children: React.ReactNode}) {
   return (
     <div className='bg-[#0a0a0a]'>
     <DashBoardHeader />
-    <div>{children}
-      </div> 
+    <div>{children}</div>
     </div>
   )
 }

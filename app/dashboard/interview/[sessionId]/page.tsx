@@ -57,8 +57,7 @@ export default function page() {
 
   return (
     <div className='mt-28 mx-5'>
-      {sessionDetailsRef.current.map((session)=>(              <Agent key={session.id} {...session} />
-
+      {sessionDetailsRef.current.map((session)=>(  <Agent key={session.id} {...session} />
       ))}
       <p className="bg-red-500"></p>
     </div>

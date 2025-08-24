@@ -7,24 +7,20 @@ import Link from 'next/link'
 import React, { useState } from 'react'
 import axios from "axios"
 import { useRouter } from 'next/navigation'
+import { StartInterviewDialog } from './StartInterviewDialog'
 
 export function AddInterview() {
 
   const {isSignedIn, user} = useUser();
   const router = useRouter();
+  const [isOpen, setIsOpen] = useState(false);
 
   const dbUser = async() =>{
-    const response = await axios.post("/api/users");
-    
-    if(response){
-      console.log(response)
-     router.push('/dashboard/interview')
-    }
-  }
+    await axios.post("/api/users");
+}
   
   return (
    <div>
-  
      <section className=' glass-card glow-primary mt-10 flex justify-start sm:w-full  md:w-[70vw] mx-auto  max-w-screen-lg p-10 rounded-2xl '>
          <div className='gap-5 flex flex-col  md:px-10'
          >
@@ -38,11 +34,13 @@ export function AddInterview() {
             </Link> :
                 <Button onClick={() =>{
                   dbUser();
-                }}  className='btn-primary max-w-sm '><Plus />Start an Interview</Button>
+                  setIsOpen(true);
+                }}  className='btn-primary max-w-sm '><Plus />Start an Interview
+                </Button>
              }
          </div>
             <Image src={'/robot.png'} height={200} width={200} alt='robo' className='hidden md:flex'/>         
-          
+            <StartInterviewDialog isOpen={isOpen} setIsOpen={setIsOpen}/>
      </section>
      </div>
 )

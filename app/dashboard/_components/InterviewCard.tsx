@@ -6,9 +6,11 @@ import { getRandomInterviewCover } from '@/app/config';
 import { Calendar, Star } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
+import { useUser } from '@clerk/nextjs';
 
 export interface InterviewCardProps {
-  interviewId?: string;
+  id?: string;
+  sessionId: string;
   userId?: string;
   role: string;
   type: string;
@@ -31,13 +33,15 @@ interface Feedback {
   createdAt: string;
 }
 
-export function InterviewCard({interviewId, role, type, techstack, createdAt}: InterviewCardProps) {
+export function InterviewCard({sessionId, role, type, techstack, createdAt}: InterviewCardProps) {
 
+     const {user, isSignedIn} = useUser(); 
      const feedback = null as Feedback | null;
      const formattedDate = dayjs(feedback?.createdAt || createdAt || Date.now()).format('MMM D, YYYY')
  
      return (
-    <div className='glass-card rounded-xl hover-lift card-dark'>
+     
+  <div className='glass-card rounded-xl hover-lift card-dark'>
       <div className=''>
         
          <div className='absolute top-0 right-0 px-4  py-2 rounded-lg w-fit bg-light-600'>
@@ -71,8 +75,8 @@ export function InterviewCard({interviewId, role, type, techstack, createdAt}: I
 
             <Button className='rounded-lg mt-4 flex mx-auto btn-accent'>
               <Link href={feedback ? 
-                `/interview/${interviewId}/feedback`
-                : `/interview/${interviewId}`
+                `dashboard/interview/${sessionId}/feedback`
+                : `dashboard/interview/${sessionId}`
               }>
                 {feedback ? 'Check Feedback' : 'Take Interview'}
               </Link>
@@ -80,8 +84,7 @@ export function InterviewCard({interviewId, role, type, techstack, createdAt}: I
           </div>
 
       </div>
-    </div>
-    
+    </div> 
   )
 }
 

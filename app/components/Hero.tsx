@@ -32,7 +32,7 @@ const Hero: React.FC = () => {
             </button>
             </Link>
 
-            <Link href={"/dashboard"}>
+            <Link href={"/resume-dashboard"}>
             <button className="btn-secondary px-8 py-4 text-lg font-semibold flex items-center justify-center hover-glow">
               <NotepadText className="mr-3 h-5 w-5" />
                 Analyse Resume
@@ -71,7 +71,7 @@ const Hero: React.FC = () => {
                       <Brain className="h-5 w-5 text-primary mr-2" />
                       <div>
                         <span className="text-white font-medium text-sm">Script AI</span>
-                        <div className="text-primary text-xs">GPT-4</div>
+                        <div className="text-primary text-xs">Gemini-2.0</div>
                       </div>
                     </div>
                     <div className="h-2 bg-gray-700 rounded-full overflow-hidden">
@@ -82,24 +82,24 @@ const Hero: React.FC = () => {
 
                   <div className="glass-card rounded-lg p-4 hover-lift">
                     <div className="flex items-center mb-3">
-                      <Eye className="h-5 w-5 text-secondary mr-2" />
+                      <Bot className="h-5 w-5 text-secondary mr-2" />
                       <div>
-                        <span className="text-white font-medium text-sm">Visual AI</span>
-                        <div className="text-secondary text-xs">Vision</div>
+                        <span className="text-white font-medium text-sm">Interview</span>
+                        <div className="text-secondary text-xs">Speak</div>
                       </div>
                     </div>
                     <div className="h-2 bg-gray-700 rounded-full overflow-hidden">
                       <div className="h-full bg-gradient-to-r from-cyan-500 to-blue-500 rounded-full glow-secondary" style={{ width: '92%' }}></div>
                     </div>
-                    <p className="text-gray-400 text-xs mt-2">Creating visuals...</p>
+                    <p className="text-gray-400 text-xs mt-2">Creating Interviews...</p>
                   </div>
 
                   <div className="glass-card rounded-lg p-4 hover-lift">
                     <div className="flex items-center mb-3">
                       <Wand2 className="h-5 w-5 text-accent mr-2" />
                       <div>
-                        <span className="text-white font-medium text-sm">Render AI</span>
-                        <div className="text-accent text-xs">Neural</div>
+                        <span className="text-white font-medium text-sm">Resume AI</span>
+                        <div className="text-accent text-xs">analyse</div>
                       </div>
                     </div>
                     <div className="h-2 bg-gray-700 rounded-full overflow-hidden">

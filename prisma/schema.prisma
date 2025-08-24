@@ -13,6 +13,7 @@ model User {
   email      String      @unique
   interviews Interview[]
   clerkId    String      @unique
+  resumes    Resume[]
 }
 
 model Interview {
@@ -25,8 +26,19 @@ model Interview {
   type       String
   level      String
   createdAt  DateTime @default(now())
-  feedback   Json?
+  feedback   Json[]
   finalized  Boolean
   userId     String
   user       User     @relation(fields: [userId], references: [id])
+}
+
+model Resume {
+  id             String  @id @default(cuid())
+  company        String
+  jobTitle       String
+  jobDescription String
+  image          String
+  userId         String
+  user           User    @relation(fields: [userId],references: [id])
+  feedback       Json[]
 }

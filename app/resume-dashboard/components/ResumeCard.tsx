@@ -1,10 +1,11 @@
 import Link from "next/link";
 import { ScoreCircle } from "./ScoreCircle";
-import Image from "next/image";
 
-export function ResumeCard({feedback, id, imagePath, resumePath, companyName, jobTitle}: Resume) {
+export function ResumeCard({feedback, id, companyName, jobTitle}: Resume) {
+
+
    return (
-        <Link href={`/resume/${id}`} className="glass-card animate-in fade-in duration-1000 p-4">
+        <Link href={`/resume-dashboard/feedback/${id}`} className="glass-card animate-in fade-in duration-1000 p-4">
 
             <div className="resume-card-header flex justify-between items-center mb-4 ">
                 <div className="flex flex-col gap-2">
@@ -13,20 +14,11 @@ export function ResumeCard({feedback, id, imagePath, resumePath, companyName, jo
                     {!companyName && !jobTitle && <h2 className="!text-black font-bold">Resume</h2>}
                 </div>
                 <div className="flex-shrink-0">
-                    <ScoreCircle score={feedback.overallScore} />
+                    {feedback?.map((score, index)=>{
+                       return <ScoreCircle key={index} score={score.overallScore} />
+                    })}
                 </div>
              </div>
-          
-           
-                <div className=" animate-in fade-in duration-1000">
-                    <div className="w-full h-full">
-                        <img
-                            src={imagePath}
-                            alt="resume"
-                            className="w-full h-[300px] max-sm:h-[150px] object-cover object-top"
-                        />
-                    </div>
-                </div>
         </Link>
     )
 }

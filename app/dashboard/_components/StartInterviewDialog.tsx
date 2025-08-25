@@ -97,7 +97,7 @@ export function StartInterviewDialog({isOpen, setIsOpen}: Props) {
       value={techstack} 
       onChange={(e) => setCurrentTechStack(e.target.value)} 
       type="text" 
-      placeholder="ex.Nextjs, prisma, postgres" 
+      placeholder="add comma (,) after every skill" 
       className="text-white font-semibold text-lg" 
       />
 

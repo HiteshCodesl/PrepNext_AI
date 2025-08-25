@@ -3,15 +3,13 @@ import axios from "axios";
 import { useParams } from "next/navigation";
 import ScoreGauge from "./ScoreGauze";
 import { useEffect, useState } from "react";
-import { ArrowBigDown, ChevronDown, Dot, DotIcon } from "lucide-react";
+import { ArrowBigDown, ArrowRight, ChevronDown, Dot, DotIcon, Square } from "lucide-react";
 import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
 import { Category } from "./ScoreColor";
+import { FeedbackData } from "./FeedbackData";
+import { da } from "zod/v4/locales";
 
-import {
-    Popover,
-    PopoverContent,
-} from "@/components/ui/popover"
 
 
 interface FeedbackTip {
@@ -24,7 +22,7 @@ interface FeedbackCategory {
    tips: FeedbackTip[]
 }
 
-interface Feedback {
+export interface Feedback {
     overallScore: number,
      ATS: FeedbackCategory,
      content: FeedbackCategory,
@@ -80,15 +78,15 @@ export function ResumeSummary() {
         </div>
         </div>
 
-        <div className=" glass-card mx-auto flex w-[600px] flex-col mt-10 p-2">
-            
-         {data?.ATS.tips.map((tip, index) =>( 
-            <div key={index} className="text-primary flex flex-col bg-gradient-to-r from-violet-700 to-purple-700 p-1">
-                <p className="text-white"><DotIcon />{tip.tip}</p>
-            </div>
-           ))}
-             
-        </div> 
+        <div className="mt-10 space-y-4">
+         <FeedbackData title="ATS" content={data?.ATS} />
+        <FeedbackData title="Tone & Style" content={data?.toneAndStyle} />
+        <FeedbackData title="Content" content={data?.content} />
+        <FeedbackData title="Structure" content={data?.structure} />
+        <FeedbackData title="Skills" content={data?.skills} />
+</div>
+
+
        </div>
 }
     </div>

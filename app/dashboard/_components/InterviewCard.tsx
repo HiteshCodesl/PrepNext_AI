@@ -6,7 +6,7 @@ import { getRandomInterviewCover } from '@/app/config';
 import { Calendar, Star } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
-import { useUser } from '@clerk/nextjs';
+import { Loader } from 'next/dynamic';
 
 export interface InterviewCardProps {
   id?: string;
@@ -35,14 +35,12 @@ interface Feedback {
 
 export function InterviewCard({sessionId, role, type, techstack, createdAt}: InterviewCardProps) {
 
-     const {user, isSignedIn} = useUser(); 
      const feedback = null as Feedback | null;
      const formattedDate = dayjs(feedback?.createdAt || createdAt || Date.now()).format('MMM D, YYYY')
  
      return (
      
-  <div className='glass-card rounded-xl hover-lift card-dark'>
-      <div className=''>
+     <div className='glass-card rounded-xl hover-lift card-dark'>
         
          <div className='absolute top-0 right-0 px-4  py-2 rounded-lg w-fit bg-light-600'>
             <Badge variant={'secondary'}>{type}</Badge>
@@ -83,7 +81,7 @@ export function InterviewCard({sessionId, role, type, techstack, createdAt}: Int
             </Button>
           </div>
 
-      </div>
+    
     </div> 
   )
 }

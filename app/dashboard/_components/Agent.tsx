@@ -1,6 +1,5 @@
 "use client"
 import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { SessionDetailsProp } from "../interview/[sessionId]/page";
@@ -8,9 +7,9 @@ import Vapi from "@vapi-ai/web";
 import { useUser } from "@clerk/nextjs";
 import { Loader, Phone, PhoneOff } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
+import axios from "axios";
 
 enum CallStatus  {
   InActive = "Inactive",
@@ -26,15 +25,14 @@ type messages = {
 
 export function Agent({coverImage, feedback, questions, level, role, techstack, type, userId, createdAt, finalized, sessionId}: SessionDetailsProp) {
 
-   const [isSpeaking, setIsSpeaking] = useState(false);
-   const [callStatus, setCallStatus] = useState<CallStatus>(CallStatus.InActive);
-   const currentRoleRef = useRef<string | null>(null);
-  const [currentRole ,setCurrentRole] = useState<string | null>();
+  const [isSpeaking, setIsSpeaking] = useState(false);
+  const [callStatus, setCallStatus] = useState<CallStatus>(CallStatus.InActive);
+  const currentRoleRef = useRef<string | null>(null);
   const [liveTranscript, setLiveTranscript] = useState<string>();
   const [messages, setMessages] = useState<messages[]>([]);
   const messageRef = useRef<messages[]>([]);   
   const vapiInstance = useRef<Vapi | null>(null );
-   const [callStarted, setCallStarted] = useState(false);
+  const [callStarted, setCallStarted] = useState(false);
   const [loading, setLoading] = useState(false);
   const {user} = useUser();
   const router = useRouter();
@@ -49,36 +47,35 @@ export function Agent({coverImage, feedback, questions, level, role, techstack, 
       techstackName = techstackName +' '+ name
     })
 
-    const handleGenerateFeedback = async(messages: messages[]) => {
-         console.log("generate feedback here");
+  const FeedbackData = async() => {
+      const result = await axios.post(`/api/interview/feedback`, {messages, sessionId });
 
-         const {success, id} = {
-          success: true,
-          id: 'feedback-id'
+      if(result){
+        console.log(result.data)
+           router.push(`/interview/${sessionId}/feedback`)
+       }else{
+            console.log("Error getting feedback")
+            router.push("/dashboard")
          }
+      }
+  
 
-         if(success && id){
-            router.push(`/interview/${sessionId}/feedback`)
-         }else{
-          console.log("Error saving feedback")
-         }
-    }
     useEffect(() =>{
        if(callStatus === CallStatus.Finished){
         if(type === 'generate'){
           router.push('/dashbaord');
         }else{
-            handleGenerateFeedback(messages);
+            FeedbackData();
         }
        }
-    }, [messages, callStatus, type, userId])
+    }, [messages, callStarted, type, userId])
 
     const StartCall = () =>{
       
        vapiInstance.current = new Vapi(process.env.NEXT_PUBLIC_VAPI_API_KEY!);
        
-       toast("Starting Interview...")
-
+       toast("starting your interview wait...")
+ 
       const assistantOptions = {
       name: "AI Recruiter",
       firstMessage: `Hello ${user?.firstName}, how are you? Ready for your interview on ${role}?`,
@@ -105,7 +102,7 @@ Begin the conversation with a friendly introduction, setting a relaxed yet profe
 questions: ${lastMessage}
  encouraging feedback after each answer. Example:
 "Nice! That’s a solid answer."
-"Hmm, not quite! Want to try again?"
+
 Keep the conversation natural and engaging—use casual phrases like "Alright, next up..." or "Let’s tackle a tricky one!"
 After questions, wrap up the interview smoothly by summarizing their performance. Example:
 "That was great! You handled some tough questions well. Keep sharpening your skills!"
@@ -175,7 +172,6 @@ Key Guidelines:
       console.error("Vapi error:", err);
 });
     }
-
     const endCall = async() =>{
       setLoading(true);
       if(!vapiInstance.current) return;
@@ -187,14 +183,14 @@ Key Guidelines:
       vapiInstance.current = null;
       console.log(messages, "messages")
       setLoading(false);
+      console.log("messages", messages);
     }
-
 
   return (
     <>
     <div className="sm:mt-12 md:mt-30  md:mx-16  glass-card card-dark  flex flex-col gap-4  max-w-screen-md lg:flex lg:mx-auto ">
 
-       <span  className=" sm:text-sm  text-white text-primary text-center mt-8 md:text-xl glass-card md:p-5 mx-auto rounded-xl flex items-center gap-3">   <Image src={coverImage} alt="company" width={50} height={50}></Image>{role} Interview</span>
+       <span  className=" sm:text-sm  text-white text-primary text-center mt-8 md:text-xl md:p-5 mx-auto rounded-xl flex items-center gap-3">   <Image src={coverImage} alt="company" width={50} height={50}></Image>{role} Interview</span>
 
        <div className="flex gap-5 justify-center  items-center mx-2">
        <Badge className="text-white bg-violet-600 text-center">{techstackName}</Badge>
@@ -231,9 +227,6 @@ Key Guidelines:
 
      </div> 
 
- 
-     
-  
     <div className="flex justify-center mb-5">
       {callStatus !== CallStatus.Active ? ( 
         <Button onClick={StartCall} 
@@ -257,5 +250,6 @@ Key Guidelines:
     </div>
     </>
   )
+
 }
 

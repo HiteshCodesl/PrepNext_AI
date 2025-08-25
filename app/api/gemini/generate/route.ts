@@ -5,7 +5,7 @@ import prismaClient from "@/app/config/prisma";
 import { getRandomInterviewCover } from "@/app/config";
 import { currentUser } from "@clerk/nextjs/server";
 
-export async function POST(request:NextRequest){
+export async function POST(request:NextRequest){ 
 
        const user = await currentUser();
        const clerkId = user?.id;

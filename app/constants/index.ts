@@ -103,7 +103,7 @@ export const mappings = {
 
 export const feedbackSchema = z.object({
   totalScore: z.number(),
-  categoryScores: z.tuple([
+  categoryScores: z.object([
     z.object({
       name: z.literal("Communication Skills"),
       score: z.number(),

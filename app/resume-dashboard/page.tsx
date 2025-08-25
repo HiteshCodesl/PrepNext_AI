@@ -1,12 +1,30 @@
 "use client"
-import React, { useState } from 'react'
-import { resumes } from '../constants'
+import React, { useEffect, useState } from 'react'
 import { ResumeCard } from './components/ResumeCard'
 import { Button } from '@/components/ui/button'
 import { ResumeDialog } from './components/ResumeDialog'
+import axios from 'axios'
+import { useUser } from '@clerk/nextjs'
 
 export default function page() {
   const [isOpen, setIsOpen] = useState(false);
+  const [ resumeData, setResumeData ] = useState<Resume[] | null>(null);
+  const { user, isSignedIn} = useUser();
+
+  useEffect(() =>{
+     const fetchResumes = async() => {
+     const response = await axios.get('/api/resume/fetchResumes')
+
+     if(response){
+      const data = response.data.resume;
+      console.log(data);
+      console.log(response.data.resume[0].feedback[0].overallScore)
+      setResumeData(data);
+     }
+  }
+  fetchResumes();
+  }, [isSignedIn])
+ 
 
   return (
     <div className='text-white h-[150vh]'>
@@ -18,13 +36,19 @@ export default function page() {
           </div>
           </section>
 
+
+          {user && resumeData ? 
+
           <section className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-9 mb-10 mx-10 lg:mx-28'>
-             {resumes.map((resume)  =>(              
-                <ResumeCard key={resume.id} {...resume} />
+             {resumeData.map((resume)  =>(              
+                <ResumeCard key={resume.id} id={resume.id} companyName={resume.companyName} jobTitle={resume.jobTitle}  feedback={resume.feedback}/>
              ))}
-          </section>
+           </section>
+          : <p className='text-lg text-primary mx-10'>You dont have any Resume Scanned</p>
+          }
+
           <ResumeDialog isOpen={isOpen} setIsOpen={setIsOpen}/>
-    </div>
+     </div>
 
   )
 }

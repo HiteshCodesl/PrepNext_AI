@@ -49,7 +49,8 @@ export function ResumeSummary() {
      }
      fetchData();
      }, [id])
-       
+      
+     
 
   return (
     <div className="flex mx-auto justify-center flex-col mb-10">

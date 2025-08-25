@@ -1,10 +1,10 @@
 import React from 'react'
-import { DashBoardHeader } from '../dashboard/_components/Header';
+import { ResumeHeader } from './components/Header';
 
 function DashBoardlayout({children}: {children: React.ReactNode}) {
   return (
     <div className='bg-[#0a0a0a]'>
-    <DashBoardHeader />
+    <ResumeHeader/>
     <div>{children}</div>
     </div>
   )

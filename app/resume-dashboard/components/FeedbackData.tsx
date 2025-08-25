@@ -18,8 +18,6 @@ interface FeedbackCategory {
    tips: FeedbackTip[]
 }
 
-
-
 export function FeedbackData({ title, content }: { title: string; content?: FeedbackCategory }) {
  const badgeColor = content?.score >= 70 ? 'bg-green-500' : content?.score >40 ? 'bg-yellow-500' : 'bg-red-600';
 
@@ -35,7 +33,7 @@ export function FeedbackData({ title, content }: { title: string; content?: Feed
         </AccordionTrigger>
 
     <AccordionContent> 
-        <div className=" glass-card mx-auto flex w-[600px] flex-col mt-10 p-2"> 
+        <div className=" glass-card mx-auto flex w-[200px] md:w-[600px]  flex-col mt-10 p-2"> 
         {content?.tips.map((tip, index) =>( <div key={index} className={`text-primary flex flex-col ${cardColor}   p-1`}>
         <p className='text-black flex gap-2 font-poppins'>
         <Dot />{tip.tip}</p> </div> ))} 
